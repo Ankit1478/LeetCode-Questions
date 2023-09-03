@@ -116,13 +116,15 @@ class Solution {
         ArrayList<Integer>ans=new ArrayList<>();
         Stack<Node>s=new Stack<>();
         while(root!=null || !s.isEmpty()){
-            while(root!=null){
+            if(root!=null){
                 s.push(root);
                 root=root.left;
             }
+            else{
                 root=s.pop();
                 ans.add(root.data);
                 root=root.right;
+            }
         }
         return ans;
     }
