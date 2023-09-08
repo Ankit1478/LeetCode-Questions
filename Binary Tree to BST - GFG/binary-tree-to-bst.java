@@ -119,36 +119,37 @@ class Node
 
 class Solution
 {
-    // The given root is the root of the Binary Tree
-    // Return the root of the generated BST
+    static int i = 0;
+
     Node binaryTreeToBST(Node root)
     {
-    //   PriorityQueue<Integer>pq=new PriorittyQueue<>();
-    //   inorder(root,pq);
-    //   return root;
-      Node rt=null;
-       ArrayList<Integer>arr=new ArrayList<>();
-       preorder(root,arr);
-       Collections.sort(arr);
-       for(int x:arr){
-               System.out.print(x+" ");
-       }
-       return rt;
+     
+        ArrayList<Integer> arr = new ArrayList<>();
+        preorder(root, arr);
+        Collections.sort(arr);
+        i = 0; // Reset i to 0 before converting to BST
+        inorder(root, arr);
+        return root;
     }
-    static void preorder(Node root,ArrayList<Integer>pq){
-        if(root==null)return ;
-        
-        pq.add(root.data);
-        preorder(root.left,pq);
-        preorder(root.right,pq);
+
+    static void preorder(Node root, ArrayList<Integer> arr) {
+        if (root == null) return;
+        arr.add(root.data);
+        preorder(root.left, arr);
+        preorder(root.right, arr);
     }
-    
+
+    static void inorder(Node root, ArrayList<Integer> arr) {
+        if (root == null) return;
+
+        inorder(root.left, arr);
+        root.data = arr.get(i++);
+        inorder(root.right, arr);
+    }
 }
  
  
- 
- 
- 
+
  
  
  
