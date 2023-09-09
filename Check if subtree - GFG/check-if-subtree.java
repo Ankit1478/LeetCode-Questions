@@ -128,19 +128,14 @@ class GfG {
 
 class Solution {
     public static boolean isSubtree(Node T, Node S) {
-       if (T == null || S==null)
-            return false;
-
-        return  isSame(T, S)||isSubtree(T.left, S) || isSubtree(T.right, S);
+        if(T==null || S==null)return false;
+        return isSame(T,S) || isSubtree(T.left,S) || isSubtree(T.right,S);
     }
-
-    static boolean isSame(Node t, Node s) {
-        if (t == null && s == null)
-            return true;
-
-        if (t == null || s == null)
-            return false;
-
-        return (t.data == s.data) && isSame(t.left, s.left) && isSame(t.right, s.right);
+    static boolean isSame(Node t,Node s){
+        if (t == null && s == null) return true;
+        if(t==null || s==null)return false;
+        
+       return (t.data==s.data)&& isSame(t.left,s.left) && isSame(t.right,s.right);
+        
     }
 }
