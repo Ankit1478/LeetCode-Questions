@@ -58,27 +58,18 @@ class Complete{
     public static int maxPartitions (int arr[], int n) {
         //Complete the function
       
-        int prefixMax[]=new int[n];
-        int suffixmin[]=new int[n];
+         int count=0;
+        int max=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            max=Math.max(max,arr[i]);
 
-        prefixMax[0]=arr[0];
-        for(int i=1;i<n;i++){
-            prefixMax[i]=Math.max(prefixMax[i-1],arr[i]);
-        }
-
-
-        suffixmin[n-1]=arr[n-1];
-        for(int i=n-2;i>=0;i--){
-             suffixmin[i]=Math.min(suffixmin[i+1],arr[i]);
-        }
-
-        int ans=1;
-        for(int i=0;i<n-1;i++){
-            if(prefixMax[i]<=suffixmin[i+1]){
-                ans++;
+            if(max==i)
+            {
+                count++;
             }
         }
-        return ans;
+        return count;
     }
     
     
