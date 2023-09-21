@@ -40,15 +40,18 @@ class Solution
         return 0;
         }
         // Your code here
-        int dp[]=new int[n+1];
-        dp[0]=0;
-        dp[1]=Math.max(0,arr[0]);
+        int dp[]=new int[n];
+        dp[0]=arr[0];
         
-        for(int i=2;i<=n;i++){
-            dp[i]=Math.max(dp[i-1],dp[i-2]+arr[i-1]);
+        for(int i=1;i<n;i++){
+            int pick = arr[i];
+            if(i>1){
+                pick+=dp[i-2];
+            }
+            int notpick = dp[i-1];
+            dp[i]=Math.max(pick,notpick);
         }
-        
-        return dp[n];
+        return dp[n-1];
     }
     
 }
