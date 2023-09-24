@@ -25,51 +25,68 @@ class GFG {
 // } Driver Code Ends
 
 
-class Solution {
+class Solution
+{
     static class Pair {
         long val;
         int idx;
-
         Pair(long val, int idx) {
             this.val = val;
             this.idx = idx;
         }
     }
-
-    // Function to find the largest rectangular area possible in a given histogram.
-    public static long getMaxArea(long hist[], long n) {
-        int intN = (int) n;
-        long left[] = new long[intN];
-        long right[] = new long[intN];
-        Stack<Pair> s = new Stack<>();
-
-        for (int i = 0; i < intN; i++) {
-            while (!s.isEmpty() && s.peek().val >= hist[i]) {
+    
+    //Function to find largest rectangular area possible in a given histogram.
+    public static long getMaxArea(long arr[], long intN) 
+    {
+        int n = (int) intN;
+        long left[]= new long[n];
+        long right[]= new long[n];
+        Stack<Pair>s = new Stack<>();
+        
+        
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && s.peek().val>=arr[i]){
                 s.pop();
             }
             left[i] = s.isEmpty() ? -1 : s.peek().idx;
-            s.push(new Pair(hist[i], i));
+            s.push(new Pair(arr[i], i));
         }
-
+        
         s.clear();
-
-        for (int i = intN - 1; i >= 0; i--) {
-            while (!s.isEmpty() && s.peek().val >= hist[i]) {
+        
+         for(int i=n-1;i>=0;i--){
+            while(!s.isEmpty() && s.peek().val>=arr[i]){
                 s.pop();
             }
-            right[i] = s.isEmpty() ? intN : s.peek().idx;
-            s.push(new Pair(hist[i], i));
+            right[i] = s.isEmpty() ? n : s.peek().idx;
+            s.push(new Pair(arr[i], i));
         }
-
-        long max = 0;
-        for (int i = 0; i < intN; i++) {
+        
+        long max=0;
+        for(int i=0;i<n;i++){
             long width = right[i] - left[i] - 1;
-            long area = width * hist[i];
+            long area = width * arr[i];
             max = Math.max(max, area);
         }
         return max;
     }
+        
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
