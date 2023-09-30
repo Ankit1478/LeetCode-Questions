@@ -51,49 +51,71 @@ class Solution
     //is 1 then all the cells in its ith row and jth column will become 1.
     void booleanMatrix(int matrix[][])
     {
-        int n = matrix.length;
-        int m = matrix[0].length;
-        int x = 1;
-        int y = 1;
-
-        for (int i = 0; i < n; i++) {
-            if (matrix[i][0] == 1) {
-                x = 0;
+        // code here 
+        int n =matrix.length;
+        int m =matrix[0].length;
+        int x=1;
+        int y=1;
+        
+        for(int i=0;i<n;i++){
+            if(matrix[i][0]==1){
+                x=0;
                 break;
             }
         }
-
-        for (int j = 0; j < m; j++) {
-            if (matrix[0][j] == 1) {
-                y = 0;
+        for(int i=0;i<m;i++){
+            if(matrix[0][i]==1){
+                y=0;
                 break;
             }
         }
-
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                if (matrix[i][j] == 1) {
-                    matrix[i][0] = 1;
-                    matrix[0][j] = 1;
+        
+        for(int i=1;i<n;i++){
+            for(int j=1;j<m;j++){
+                if(matrix[i][j]==1){
+                    matrix[i][0]=1;
+                    matrix[0][j]=1;
                 }
             }
         }
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                if (matrix[i][0] == 1 || matrix[0][j] == 1) {
-                    matrix[i][j] = 1;
+        
+        
+        for(int i=1;i<n;i++){
+            for(int j=1;j<m;j++){
+                if(matrix[i][0]==1 ||   matrix[0][j]==1 ){
+                   matrix[i][j]=1;
                 }
             }
         }
-        if (x == 0) {
-            for (int i = 0; i < n; i++) {
+        
+        
+        if(x==0){
+            for(int i=0;i<n;i++){
                 matrix[i][0] = 1;
             }
         }
-        if (y == 0) {
-            for (int j = 0; j < m; j++) {
-                matrix[0][j] = 1;
+        
+        
+        if(y==0){
+            for(int i=0;i<m;i++){
+                matrix[0][i] = 1;
             }
         }
+        
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
