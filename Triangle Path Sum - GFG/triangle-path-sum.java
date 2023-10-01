@@ -36,22 +36,25 @@ class GFG {
 class Solution {
     public static int minimizeSum(int n, ArrayList<ArrayList<Integer> >grid) {
         // Code here
-        int dp[][] = new int[n][n];
-        for(int row[]:dp){
-            Arrays.fill(row,-1);
-        }
-        return f(0,0,n,grid,dp);
-    }
-    static int f(int i ,int j, int n,ArrayList<ArrayList<Integer> >grid,int dp[][]){
-        if(i==n-1){
-            return grid.get(n-1).get(j);
+     int[] prev = new int[n];
+        int[] curr = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            prev[i] = grid.get(n - 1).get(i);
         }
         
-        if(dp[i][j]!=-1)return dp[i][j];
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j =i;j>=0; j--) {
+                int down = grid.get(i).get(j) + prev[j];
+                int dia = grid.get(i).get(j) + prev[j + 1];
+                curr[j] = Math.min(down, dia);
+            }
+            
+            
+            prev = curr.clone();
+        }
         
-        int up= grid.get(i).get(j) + f(i+1,j,n,grid,dp);
-        int down =grid.get(i).get(j) + f(i+1,j+1,n,grid,dp);
-        
-        return dp[i][j] = Math.min(up,down);
+        return prev[0];
     }
+   
 }
