@@ -33,33 +33,44 @@ class Solution{
     {
         int n = a.length;
         int m = a[0].length;
-        int prev[] = new int[m];
-        int curr[] = new int[m];
-
-        for (int j = 0; j < m; j++) {
-            prev[j] = a[0][j];
-        }
-
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                int up = a[i][j] + prev[j];
-
-                int leftdia = a[i][j] + (j - 1 >= 0 ? prev[j - 1] : (int) Math.pow(-10, 9));
-                int rightdia = a[i][j] + (j + 1 < m ? prev[j + 1] : (int) Math.pow(-10, 9));
-
-                curr[j] = Math.max(up, Math.max(leftdia, rightdia));
-            }
-            for (int j = 0; j < m; j++) {
-                prev[j] = curr[j]; // Copy the values from curr to prev
-            }
-        }
-
-        int max = Integer.MIN_VALUE;
-        for (int j = 0; j < m; j++) {
-            max = Math.max(max, prev[j]);
-        }
-
-        return max;
-
+        int prev[]  = new int[m];
+        int curr[]= new int[m];
+       
+       for(int j=0;j<m;j++){
+           prev[j] = a[0][j];
+       }
+       
+       for(int i=1;i<n;i++){
+           for(int j=0;j<m;j++){
+               
+               int up= a[i][j]+prev[j];
+               
+               int leftdia =a[i][j];
+               if(j-1>=0){
+                   leftdia+= prev[j-1];
+               }
+               else{
+                   leftdia+= (int) Math.pow(-10, 9);
+               }
+               
+               int rightdia = a[i][j] ;
+               if(j+1<m){
+                   rightdia+= prev[j+1];
+               }else{
+                   rightdia+= (int) Math.pow(-10, 9);
+               }
+               
+               curr[j] = Math.max(up, Math.max(leftdia,rightdia));
+               
+           }
+          for(int j=0;j<m;j++){
+              prev[j] = curr[j];
+          }
+       }
+       int max = Integer.MIN_VALUE;
+       for(int j=0;j<m;j++){
+           max = Math.max(max,prev[j]);
+       }
+       return max;
     }
 }
