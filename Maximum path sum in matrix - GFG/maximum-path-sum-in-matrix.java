@@ -34,32 +34,39 @@ class Solution{
         int n = a.length;
         int m = a[0].length;
         int dp[][]  = new int[n][m];
-        for(int row[] : dp){
-            Arrays.fill(row,-1);
-        }
-        int max = Integer.MIN_VALUE;
-        for(int i=0;i<m;i++){
-            int getmax = f(n-1,i,n,m,a,dp);
-            
-            max =Math.max(max,getmax);
-        }
-        return max;
-    }
-    static int f(int i,int j, int n ,int m, int a[][] , int dp[][]){
        
-        if(j<0 || j>=m){
-              return (int) Math.pow(-10, 9);
-        }
-        
-         if(i==0)return a[0][j];
-        
-        
-        if(dp[i][j]!=-1)return dp[i][j];
-        
-        int up = a[i][j]+f(i-1,j,n,m,a,dp);
-        int leftdia = a[i][j]+f(i-1,j-1,n,m,a,dp);
-        int rightdia = a[i][j]+f(i-1,j+1,n,m,a,dp);
-        
-        return dp[i][j] = Math.max(up, Math.max(leftdia,rightdia));
+       for(int j=0;j<m;j++){
+           dp[0][j] = a[0][j];
+       }
+       
+       for(int i=1;i<n;i++){
+           for(int j=0;j<m;j++){
+               
+               int up= a[i][j]+dp[i-1][j];
+               
+               int leftdia =a[i][j];
+               if(j-1>=0){
+                   leftdia+= dp[i-1][j-1];
+               }
+               else{
+                   leftdia+= (int) Math.pow(-10, 9);
+               }
+               
+               int rightdia = a[i][j] ;
+               if(j+1<m){
+                   rightdia+= dp[i-1][j+1];
+               }else{
+                   rightdia+= (int) Math.pow(-10, 9);
+               }
+               
+               dp[i][j] = Math.max(up, Math.max(leftdia,rightdia));
+               
+           }
+       }
+       int max = Integer.MIN_VALUE;
+       for(int j=0;j<m;j++){
+           max = Math.max(max,dp[n-1][j]);
+       }
+       return max;
     }
 }
