@@ -57,25 +57,27 @@ class Solution{
     public static int sum(int arr[],int d,int n){
         
        
-        int dp[][] = new int[n][d+1];
-        if(arr[0]==0) dp[0][0] = 2;
-        else dp[0][0] =1;
+        int prev[] = new int[d+1];
+        if(arr[0]==0) prev[0] = 2;
+        else prev[0] =1;
         
-        if(arr[0]!=0 && arr[0]<= d) dp[0][arr[0]] =1;
+        if(arr[0]!=0 && arr[0]<= d) prev[arr[0]] =1;
         
-	
+	     
 		 for(int i=1;i<n;i++){
+		     int curr[] = new int[d+1];
 		     for(int j=0;j<=d;j++){
 		         
-		         int notake = dp[i-1][j];
+		         int notake = prev[j];
 		         int take = 0;
 		         if(arr[i]<= j){
-		             take = dp[i-1][j-arr[i]];
+		             take = prev[j-arr[i]];
 		         }
-		         dp[i][j] = (take+notake)%mod;
+		         curr[j] = (take+notake)%mod;
 		     }
+		     prev = curr;
 		 }
-		 return dp[n-1][d];
+		 return prev[d];
 	}
 }
 
