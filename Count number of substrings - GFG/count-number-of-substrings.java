@@ -23,13 +23,26 @@ class GfG
 // } Driver Code Ends
 
 
-
-
 //User function Template for Java
 
 class Solution
 {
+    long substrCount (String str, int k) {
+        // your code here
+        
+       int n = str.length();
+        return solve(str, n, k) - solve(str, n, k - 1);
+        // aba
+        // for k =2;
+        // aba=> index = 0,1,2 sum = j-i+1 => 2+2+2 =6;
+        
+        // k==1
+        // index = 1+1+1 = 3
+        // 6-3 =3;
+    }
+    
      static long solve(String str, int n, int k) {
+        
         int i = 0, j = 0;
         long ans = 0;
         long dist = 0;
@@ -37,6 +50,7 @@ class Solution
 
         while (j < n) {
             arr[str.charAt(j) - 'a']++;
+            
             if (arr[str.charAt(j) - 'a'] == 1)
                 dist++;
 
@@ -53,11 +67,5 @@ class Solution
         }
 
         return ans;
-    }
-
-    long substrCount (String str, int k) {
-        // your code here
-        int n = str.length();
-        return solve(str, n, k) - solve(str, n, k - 1);
     }
 }
