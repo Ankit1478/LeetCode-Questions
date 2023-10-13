@@ -23,51 +23,28 @@ class GFG {
 
 
 class Solution {
-    public int editDistance(String word1, String word2) {
+    public int editDistance(String s, String t) {
         // Code here
+        int n = s.length();
+        int m = t.length();
+        int dp[][] = new int[n+1][m+1];
+        for(int row[]:dp)Arrays.fill(row,-1);
         
-        int n=word1.length();
-        int m =word2.length();
-        int dp[][]=new int[n+1][m+1];
-
-        // if(j==0) return i;
-        for(int i=0;i<=n;i++){
-            dp[i][0]=i;
+        return f(n,m,s,t,dp);
+    }
+    static int f(int i ,int j, String s, String t,int dp[][]){
+        
+        if(i==0)return j;
+        if(j==0)return i;
+        
+        if(dp[i][j]!=-1)return dp[i][j];
+        
+        if(s.charAt(i-1)==t.charAt(j-1)){
+            dp[i][j] = f(i-1,j-1,s,t,dp);
         }
-        //if (i==0) return j;
-        for(int j=0;j<=m;j++){
-            dp[0][j]=j;
+        else{
+            dp[i][j] = 1+Math.min(f(i-1,j-1,s,t,dp),Math.min(f(i,j-1,s,t,dp),f(i-1,j,s,t,dp)));
         }
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=m;j++){
-                if(word1.charAt(i-1)==word2.charAt(j-1)){
-                    dp[i][j]=0+dp[i-1][j-1];
-                }else{
-                    dp[i][j]=1+Math.min(dp[i-1][j-1],Math.min(dp[i-1][j],dp[i][j-1]));
-                }
-            }
-        }
-        return dp[n][m];
-    //     int n = s.length();
-    //     int m = t.length();
-    //     int dp[][] = new int[n+1][m+1];
-    //     for(int row[]:dp)Arrays.fill(row,-1);
-        
-    //     return f(n,m,s,t,dp);
-    // }
-    // static int f(int i ,int j, String s, String t,int dp[][]){
-        
-    //     if(i==0)return j+1;
-    //     if(j==0)return i+1;
-        
-    //     if(dp[i][j]!=-1)return dp[i][j];
-        
-    //     if(s.charAt(i-1)==t.charAt(j-1)){
-    //         dp[i][j] = f(i-1,j-1,s,t,dp);
-    //     }
-    //     else{
-    //         dp[i][j] = 1+Math.min(f(i-1,j,s,t,dp),Math.min(f(i,j-1,s,t,dp),f(i-1,j-1,s,t,dp)));
-    //     }
-    //     return dp[i][j];
+        return dp[i][j];
     }
 }
