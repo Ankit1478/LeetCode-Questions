@@ -35,9 +35,9 @@ class GFG {
 class Solution {
     static class Pair{
         int first, second;
-        Pair(int first, int second){
-            this.first = first;
-            this.second = second;
+        Pair(int price, int day){
+            this.first = price;
+            this.second = day;
         }
     }
     public static int buyMaximumProducts(int n, int k, int[] price) {
@@ -51,13 +51,6 @@ class Solution {
         // Sorting the ArrayList in ascending order based on price
       Collections.sort(v, (a, b) -> a.first - b.first);
 
-        // Collections.sort(v, new Comparator<Pair>(){
-        //     @Override
-        //     public int compare(Pair p1, Pair p2){
-        //         return p1.first - p2.first;
-        //     }
-        // });
-        
         int ans = 0;
         for (int i = 0; i < n; ++i) {
             // Calculate maximum number of products that can be bought for the current price
