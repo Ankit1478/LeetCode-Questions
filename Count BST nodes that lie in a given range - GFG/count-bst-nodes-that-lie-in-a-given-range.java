@@ -119,13 +119,40 @@ class Solution
     int getCount(Node root,int l, int h)
     {
         //Your code here
+        // int count=0;
+        // if(root==null)return 0 ;
+        // if(root.data>=l && root.data<=h){
+        //     count++;
+        // }
+        // count+=getCount(root.left,l,h);
+        // count+=getCount(root.right,l,h);
+        // return count;
+        
+        Queue<Node>q=new LinkedList<>();
+        q.add(root);
         int count=0;
-        if(root==null)return 0 ;
-        if(root.data>=l && root.data<=h){
-            count++;
+        while(!q.isEmpty()){
+            int n=q.size();
+            
+            for(int i=0;i<n;i++){
+                Node node=q.poll();
+                if(node.data>=l && node.data<=h)count++;
+                
+                if(node.left!=null)q.add(node.left);
+                if(node.right!=null)q.add(node.right);
+            }
         }
-        count+=getCount(root.left,l,h);
-        count+=getCount(root.right,l,h);
         return count;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
