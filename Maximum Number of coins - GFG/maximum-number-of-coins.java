@@ -40,6 +40,7 @@ class Solution{
 	    int dp[][] = new int[n+2][n+2];
 	    for(int row[]:dp)Arrays.fill(row,-1);
 	    return f(1,arr.size(),temp,dp);
+	  
 	    
 	}
 	static int f(int i ,int j,  ArrayList<Integer> arr,int dp[][]){
@@ -55,3 +56,30 @@ class Solution{
 	    return dp[i][j]=max;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  for(int i=1;i<=n;i++){
+// 	       for(int j=1;j<=n;j++){
+// 	           int max =Integer.MIN_VALUE;
+// 	           if(i>j)return 0;
+	    
+// 	    for(int k=i;k<=j;k++){
+// 	        int cost = arr.get(i-1)*arr.get(k)*arr.get(j+1)+f(i,k-1,arr,dp) + f(k+1,j,arr,dp);
+// 	        max = Math.max(cost,max);
+// 	    }
+// 	     dp[i][j]=max;
+// 	       }
+// 	   }
+// 	   return dp[]
