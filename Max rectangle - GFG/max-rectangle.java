@@ -79,21 +79,18 @@ class Solution {
     }
     public int maxArea(int M[][], int n, int m) {
         // add code here.
-        int ans[]= new int[m];
+      
         int max=0;
+        int height[] = new int[n];
         
-        
-        for(int j=0;j<m;j++){
-            ans[j]=M[0][j];
-            max = Math.max(max, MAH(ans));
-        }
-        
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(M[i][j]==0) ans[j]=0;
-                else ans[j]=ans[j]+M[i][j];
+                if(M[i][j]==1){
+                    height[j]++;
+                }
+                else height[j]=0;
             }
-             max = Math.max(max, MAH(ans));
+            max = Math.max(max,MAH(height));
         }
         return max;
     }
