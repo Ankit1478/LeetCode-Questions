@@ -27,16 +27,25 @@ class GfG
 
 class Solution
 {
-	public int maxSumIS(int nums[], int n)  
+	public int maxSumIS(int arr[], int n)  
 	{  
-	    //code here.
 	   
-       int dp[][] = new int[n][n+1];
+       int dp[][] = new int[n+1][n+1];
 
-       for(int row[]:dp)Arrays.fill(row,-1);
+       
+       for(int i=n-1;i>=0;i--){
+           for(int j=i-1;j>=-1;j--){
+               int nottake = dp[i+1][j+1];
+               int take = 0;
+        if(j==-1 || arr[i] > arr[j]){
+            take = arr[i] + dp[i+1][i+1];
+            }
 
-       return f(0,-1,nums,dp);
-          
+         dp[i][j+1] = Math.max(nottake,take);
+           }
+       }
+       return dp[0][0];
+       
 	}  
 	static int f(int idx,int prev,int arr[],int dp[][]){
         if(idx==arr.length)return 0;
