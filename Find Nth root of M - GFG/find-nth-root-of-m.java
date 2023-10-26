@@ -30,6 +30,15 @@ class GFG
 
 class Solution
 {
+    static int f(int mid ,int n, int m){
+        long ans =1;
+        for(int i=1;i<=n;i++){
+            ans = ans*mid;
+            if(ans>m)return 2;
+        }
+        if(ans==m)return 1;
+        return 0;
+    }
     public int NthRoot(int n, int m)
     {
         // code here
@@ -37,17 +46,18 @@ class Solution
        int high = m;
        long ans=0;
        while(low<=high){
-           long mid = (low+high)/2;
+           int mid2 = (low+high)/2;
+           int mid=f(mid2,n,m);
            
-           if((Math.pow(mid, n))==m ){
-               return (int)mid;
+           if(mid==1 ){
+               return mid2;
            }
 
-           if((Math.pow(mid, n))<m ){
-               low =(int) mid+1;
+           if(mid==0){
+               low =mid2+1;
            }
            else{
-               high =(int) mid-1;
+               high = mid2-1;
            }
        }
        return -1;
