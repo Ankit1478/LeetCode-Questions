@@ -49,13 +49,14 @@ class Solution {
     }
     return l;
   }
+  static int countsmaller(int A[i],int row,)
     int median(int A[][], int row, int col) {
     int low = 1;
     int high = 1000000000;
     int n = row;
     int m = col;
     while (low <= high) {
-      int mid = (low + high) >> 1;
+      int mid = (low + high) / 2;
       int cnt = 0;
       for (int i = 0; i < n; i++) {
         cnt += countSmallerThanMid(A[i], mid, col);
