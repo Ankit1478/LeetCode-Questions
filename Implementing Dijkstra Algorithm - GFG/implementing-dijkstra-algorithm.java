@@ -53,48 +53,51 @@ class DriverClass
 
 
 //User function Template for Java
-
-
 class Solution
 {
     static class Pair{
         int node;
-        int dist;
-        Pair(int node ,int dist){
-            this.node =node;
-            this.dist=dist;
+        int wt;
+        Pair(int node,int wt){
+            this.node = node;
+            this.wt=wt;
         }
     }
+    //Function to find the shortest distance of all the vertices
+    //from the source vertex S.
     static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S)
     {
-        // Write your code here
-        int dist[]=new int[V];
-        Arrays.fill(dist,Integer.MAX_VALUE);
+        int dist[] = new int[V];
+        for(int i=0;i<V;i++){
+            dist[i]=(int)1e9;
+        }
+        PriorityQueue<Pair>pq = new PriorityQueue<>((a,b)-> (a.wt-b.wt));
         
-        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)-> a.dist-b.dist);
-        dist[S]=0;
         pq.add(new Pair(S,0));
-        
+        dist[S]=0;
         
         while(!pq.isEmpty()){
-            Pair it=pq.peek();
-            int node =it.node;
-            int dis=it.dist;
+            int node = pq.peek().node;
+            int wt = pq.peek().wt;
             pq.poll();
             
-            for(int i=0;i<adj.get(node).size();i++){
-                int edgewt=adj.get(node).get(i).get(1);
-                int adjnode=adj.get(node).get(i).get(0);
+            for(int it=0;it<adj.get(node).size();it++){
+                int edgewt= adj.get(node).get(it).get(1);
+                int adjnode = adj.get(node).get(it).get(0);
                 
-                if(dis+edgewt < dist[adjnode]){
-                    dist[adjnode]=dis+edgewt;
+                if(wt+edgewt < dist[adjnode]){
+                    dist[adjnode] =  wt+edgewt;
                     pq.add(new Pair(adjnode,dist[adjnode]));
                 }
             }
         }
+        
         return dist;
     }
 }
+
+
+
 
 
 
