@@ -19,16 +19,17 @@ class Solution
     ArrayList<Long> findMissing(long A[], long B[], int n, int m)
     {
         HashSet<Long>set = new HashSet<>();
-        for(int i=0;i<n;i++){
+        for(int i=0;i<m;i++){
             set.add(B[i]);
         }
         ArrayList<Long>ans = new ArrayList<>();
         
-        for(int i=0;i<m;i++){
-            if(!set.contains(B[i])){
-                ans.add(B[i]);
+        for(int i=0;i<n;i++){
+            if(!set.contains(A[i])){
+                ans.add(A[i]);
             }
         }
+        
         return ans;
     }
 }
