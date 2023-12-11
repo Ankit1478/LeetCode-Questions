@@ -34,13 +34,15 @@ class GFG
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 class Solution {
 	public static int[] help_classmate(int arr[], int n) 
 	{ 
-
-	   Stack<Integer>s = new Stack<>();
+	    // Your code goes here
+	    Stack<Integer>s = new Stack<>();
        int ans[]=new int[n];
         for(int i=n-1;i>=0;i--){
             while(!s.isEmpty() && s.peek()>=arr[i]){
